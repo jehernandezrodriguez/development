@@ -2,6 +2,8 @@ configmap:
   enabled: false
   data:
     ClinicDemoUserId: ""
+    KeycloakClientId: ""
+    KeycloakRealmUrl: ""
 secret:
   enabled: false
   data_:
@@ -9,6 +11,8 @@ secret:
     UserLongTermKey:
     UserMailVerification: ""
     ClinicDemoUserId: ""
+    KeycloakClientSecret: ""
+    KeycloakMigrationSecret: ""
 deployment:
   image: tidepool/shoreline:master-latest
   replicas: 1
