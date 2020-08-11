@@ -165,7 +165,7 @@ spec:
             }
         - name: TIDEPOOL_KEYCLOAK_CLIENT_ID
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: shoreline
               key: KeycloakClientId
               optional: true
@@ -177,7 +177,7 @@ spec:
               optional: true
         - name: TIDEPOOL_KEYCLOAK_REALM_URL
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: shoreline
               key: KeycloakRealmUrl
               optional: true
