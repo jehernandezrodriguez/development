@@ -33,7 +33,7 @@ spec:
           name: {{ $spec.extauth.name }}
           namespace: {{ $spec.extauth.namespace }}
 {{- end }}
-{{- if and $spec.jwt $spec.jwt.enabled }}
+{{- if false }}
 {{- if not $optionsExist }}
 {{ $optionsExist = true }}
     options:
