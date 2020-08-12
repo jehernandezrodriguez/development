@@ -21,6 +21,8 @@ spec:
     options:
       prefixRewrite: /users
       timeout: '30s'
+      jwt:
+        disable: true
 
   - matchers:
     - methods:
@@ -34,6 +36,8 @@ spec:
           name: shoreline
     options:
       prefixRewrite: /user/
+      jwt:
+        disable: true
 
   - matchers:
     - methods:
@@ -46,6 +50,8 @@ spec:
           name: shoreline
     options:
       prefixRewrite: /user
+      jwt:
+        disable: true
 
   - matchers:
     - methods:
@@ -58,6 +64,8 @@ spec:
     options:
       prefixRewrite: /login
       timeout: '30s'
+      jwt:
+        disable: true
 
   - matchers:
     - methods:
@@ -70,4 +78,6 @@ spec:
     options:
       prefixRewrite: /token/
       timeout: '30s'
+      jwt:
+        disable: true
 {{- end }}
