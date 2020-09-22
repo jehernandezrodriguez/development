@@ -1,3 +1,4 @@
+{{ if .Values.enabled }}
 {{ if .Values.global.glooingress.enabled }}
 apiVersion: gateway.solo.io/v1
 kind: RouteTable
@@ -23,6 +24,17 @@ spec:
   - matchers:
     - methods:
       - POST
+      regex: /v1/users/[^/]+/summaries
+    routeAction:
+      single:
+        upstream:
+          name: summary
+    options:
+      jwt:
+        disable: true
+  - matchers:
+    - methods:
+      - POST
       regex: /v1/clinics/[^/]+/summaries
     routeAction:
       single:
@@ -31,4 +43,5 @@ spec:
     options:
       jwt:
         disable: true
+{{- end }}
 {{- end }}
