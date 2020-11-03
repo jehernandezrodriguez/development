@@ -9,6 +9,7 @@ metadata:
   namespace: {{.Release.Namespace}}
   annotations:
     secret.reloader.stakater.com/reload: "server,{{ .Values.mongo.secretName }},user,userdata"
+    configmap.reloader.stakater.com/reload: "{{ .Values.kafka.configmapName }}"
 {{ if .Values.deployment.annotations }}
     {{- .Values.deployment.annotations | toYaml | nindent 4 }}
 {{- end }}
@@ -42,24 +43,10 @@ spec:
         {{ include "charts.platform.env.mongo" .}}
         {{ include "charts.platform.env.misc" .}}
         {{ include "charts.platform.env.clients" .}}
-        - name: KAFKA_BROKERS
-          valueFrom:
-            configMapKeyRef:
-              name: kafka
-              key: Brokers
-              optional: true
-        - name: KAFKA_TOPIC
-          valueFrom:
-            configMapKeyRef:
-              name: kafka
-              key: MarketoTopic
-              optional: true
-        - name: KAFKA_PREFIX
-          valueFrom:
-            configMapKeyRef:
-              name: kafka
-              key: TopicPrefix
-              optional: true
+        {{ include "charts.kafka.common" .}}
+        {{ include "charts.kafka.cloudevents.client" (dict "Values" .Values "Release" .Release "client" "user") }}
+        - name: TIDEPOOL_IMAGE_CLIENT_ADDRESS
+          value: http://image:9226
         - name: TIDEPOOL_USER_SERVICE_SECRET
           valueFrom:
             secretKeyRef:
